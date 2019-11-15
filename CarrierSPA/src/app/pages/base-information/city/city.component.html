@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-lg-12">
+    <nb-card>
+      <nb-card-header>City Managment</nb-card-header>
+      <nb-card-body>
+      <form #MangageForm="ngForm">
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <div class="buttons-row">
+              <button nbButton status="primary" hero (click)="onAdd()">Add</button>&nbsp;&nbsp;&nbsp;
+              <button nbButton status="success" hero (click)="onEdit()" [disabled]="!MangageForm.valid">Edit</button>
+                &nbsp;&nbsp;&nbsp;
+              <button nbButton status="danger" hero (click)="onDelete()" [disabled]="!MangageForm.valid">Delete</button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <ng2-completer [datasource]="dataService" inputClass="form-control" required [(ngModel)]="cityName" name="cityName"  inputName="searchField" [minSearchLength]="2" placeholder="Cities">
+            </ng2-completer>
+          </div>
+        </div>
+        <br/><br/><br/><br/><br/><br/><br/><br/>
+      </form>
+      <div *ngIf="saveState != '0'">
+        <ng-container *ngIf="saveState == '1'; else elseTemplate">
+          <nb-alert status="success">Data have been successfully Saved</nb-alert>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <nb-alert status="danger">{{saveState}}</nb-alert>
+        </ng-template>
+      </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

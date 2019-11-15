@@ -1,0 +1,28 @@
+<h1 id="title" class="title">Login</h1>
+<p class="sub-title">Hello! Log in</p>
+
+<div *ngIf="saveState != '0'">
+  <ng-container *ngIf="saveState == '1'; else elseTemplate">
+    <nb-alert status="success">Login Successfully</nb-alert>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <nb-alert status="danger">{{saveState}}</nb-alert>
+  </ng-template>
+</div>
+<form #loginForm="ngForm" (ngSubmit)="login()">
+
+  <div class="form-control-group">
+    <label class="label" >Username:</label>
+    <input class="form-control mr-sm-2" type="text" name="username" placeholder="Username" required [(ngModel)]="model.username">
+  </div>
+
+  <div class="form-control-group">
+    <span class="label-with-link">
+      <label class="label" >Password:</label>
+    </span>
+    <input class="form-control mr-sm-2" type="password" name="password" placeholder="Password" required [(ngModel)]="model.password">
+  </div>
+  <br/>
+  <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Login </button>
+</form>
+

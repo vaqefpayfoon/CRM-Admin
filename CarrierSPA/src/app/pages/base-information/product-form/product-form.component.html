@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-lg-12">
+    <nb-card>
+      <nb-card-header>{{_id == -1 ? 'Add Product' : 'Update Product'}}</nb-card-header>
+      <nb-card-body>
+        <form [formGroup]="baseForm" (submit)="baseSubmit()">
+          <div class="form-group row">
+            <label for="productName" class="label col-sm-2 col-form-label">ProductName</label>
+            <div class="col-sm-7">
+              <input class="form-control" type="text" placeholder="ProductName" formControlName="productName" name="productName">
+              <span *ngIf="!baseForm.get('productName').valid && baseForm.get('productName').touched"
+              ><nb-alert outline="danger" style="padding: 0.5rem;margin: 0.3rem">Required</nb-alert></span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="offset-sm-3 col-sm-4">
+              <button type="submit" nbButton status="primary" [disabled]="!baseForm.valid">Save</button>
+            </div>
+          </div>
+          <div *ngIf="saveState != '0'">
+            <ng-container *ngIf="saveState == '1'; else elseTemplate">
+              <nb-alert status="success">Data have been successfully Saved</nb-alert>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <nb-alert status="danger">{{saveState}}</nb-alert>
+            </ng-template>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-lg-12">
+<nb-card>
+  <nb-card-header>active projects</nb-card-header>
+  <nb-card-body>
+      <div class="form-group row">
+          <div class="col-sm-6">
+            <div class="buttons-row">
+              <button nbButton status="primary" hero (click)="onAdd()">Add</button>
+            </div>
+          </div>
+        </div>
+      <table class="table table-bordered table-striped">
+        <thead style="color:#ea7f7f">
+          <tr>
+            <th scope="col">userName</th>
+            <th scope="col">cityName</th>
+            <th scope="col">createdAt</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let charge of charges; let i=index" style="color:white">
+          <tr>
+            <td>{{charge.userName}}</td>
+            <td>{{charge.cityName}}</td>
+            <td>{{charge.createdAt}}</td>
+            <td><button nbButton status="success" hero (click)="onEdit(charge)" [size]="'small'">Edit</button></td>
+            <td><button nbButton status="danger" hero (click)="onDelete(charge)" [size]="'small'">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+    <div class="d-flex justify-content-center">
+      <pagination
+          [boundaryLinks]="true"
+          [totalItems]="pagination.totalItems"
+          [(ngModel)]="pagination.currentPage"
+          [itemsPerPage]="pagination.itemsPerPage"
+          (pageChanged)="pageChanged($event)"
+        previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+      </pagination>
+    </div>
+    <div *ngIf="saveState != '0'">
+        <ng-container *ngIf="saveState == '1'; else elseTemplate">
+          <nb-alert status="success">Data have been successfully Saved</nb-alert>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <nb-alert status="danger">{{saveState}}</nb-alert>
+        </ng-template>
+      </div>
+  </nb-card-body>
+</nb-card>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="row">
+    <div class="col-lg-12">
+      <nb-card>
+        <nb-card-header>{{_id == -1 ? 'Add Charge' : 'Update Charge'}}</nb-card-header>
+        <nb-card-body>
+          <form [formGroup]="baseForm" (submit)="baseSubmit()">
+            <div class="form-group row">
+              <label for="cityName" class="label col-sm-2 col-form-label">CityName</label>
+              <div class="col-sm-7">
+                <ng2-completer [datasource]="dataService" inputClass="form-control" formControlName="cityName" name="cityName" inputName="searchField" [minSearchLength]="2" placeholder="Cities">
+                  </ng2-completer>
+              </div>
+            </div>
+            <div class="form-group row">
+                <label for="createAt" class="label col-sm-2 col-form-label">createAt</label>
+                <div class="col-sm-7">
+                    <input [nbDatepicker]="datepicker" class="form-control" formControlName="createAt">
+                    <nb-datepicker #datepicker ></nb-datepicker>
+                </div>
+              </div>
+            <div class="form-group row">
+              <div class="offset-sm-3 col-sm-4">
+                <button type="submit" nbButton status="primary" [disabled]="!baseForm.valid">Save</button>
+              </div>
+            </div>
+            <hr/>
+            <h5 class="grid-h">Charges Details</h5>
+            <form [formGroup]="orderForm">
+              <div formArrayName="ingredients"
+                *ngFor="let ingredientCtrl of getControls(); let i = index">
+                <div [formGroupName]="i" class="row show-grid">
+                    <input type="hidden" formControlName="id" id="id">
+                    <input type="hidden" formControlName="chargeId" id="chargeId">
+                    <div class="col-4 col-sm-4">
+                        <select formControlName="chargeType" class="form-control">
+                            <option *ngFor="let item of chargeTypeArr" [ngValue]="item.id" class="form-control">
+                              {{ item.name }}</option>
+                        </select>
+                    </div>
+                    <div class="col-4 col-sm-4">
+                        <input class="form-control" formControlName="amount" placeholder="amount">
+                    </div>
+                    <div class="col-4 col-sm-4">
+                        <input class="form-control" formControlName="moreInfo" placeholder="moreInfo">
+                    </div>
+                    <div class="col-2 col-sm-2">
+                        <div class="buttons-row">
+                          <button type="submit" nbButton status="danger" [size]="'small'" (click)="onDeleteIngredient(i)" >Delete</button>
+                          <button type="submit" nbButton status="danger" [size]="'small'" (click)="onUpdateIngredient(i)" >Delete</button>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <button type="submit" nbButton status="primary" [size]="'small'"
+               (click)="onAddIngredient()">Save</button>
+            </form>
+          </form>
+          <div *ngIf="saveState != '0'">
+            <ng-container *ngIf="saveState == '1'; else elseTemplate">
+              <nb-alert status="success">Data have been successfully Saved</nb-alert>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <nb-alert status="danger">{{saveState}}</nb-alert>
+            </ng-template>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>

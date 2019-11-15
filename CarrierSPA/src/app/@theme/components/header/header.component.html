@@ -1,0 +1,35 @@
+<div class="header-container">
+  <div class="logo-container">
+    <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
+      <nb-icon icon="menu-2-outline"></nb-icon>
+    </a>
+    <a class="logo" (click)="navigateHome()">CRM-<span>Soft</span></a>
+  </div>
+  <!-- <nb-select [selected]="currentTheme" (selectedChange)="changeTheme($event)" status="primary">
+    <nb-option *ngFor="let theme of themes" [value]="theme.value"> {{ theme.name }}</nb-option>
+  </nb-select> #222b45-->
+</div>
+
+<div class="header-container">
+  <nb-actions size="small">
+    <nb-action class="control-item">
+      <nb-search type="rotate-layout"></nb-search>
+    </nb-action>
+    <nb-action class="control-item" icon="email-outline"></nb-action>
+    <nb-action class="control-item" icon="bell-outline"></nb-action>
+    <nb-action class="user-action">
+    <div *ngIf="loggedIn()" dropdown >
+      <a class="dropdown-toggle text-light" dropdownToggle>
+          Welcome {{authService.decodedToken?.unique_name | titlecase}}
+      </a>
+      <span>
+        <img src="{{photoUrl || '../../../../../../assets/images/user.png" alt="can't read">
+      </span>
+      <div class="dropdown-menu" *dropdownMenu style="background-color: #1b1b38;">
+        <a class="dropdown-item text-light"  (click)="logout()">
+          <i class="fa fa-sign-out">Logout</i></a>
+      </div>
+    </div>
+    </nb-action>
+  </nb-actions>
+</div>

@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-lg-12">
+<nb-card>
+  <nb-card-header>active projects</nb-card-header>
+  <nb-card-body>
+      <table class="table table-bordered table-striped">
+        <thead style="color:#ea7f7f">
+          <tr>
+            <th scope="col">projectTitle</th>
+            <th scope="col">supcustName</th>
+            <th scope="col">productName</th>
+            <th scope="col">userName</th>
+            <th scope="col">toDoDate</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let projectHeader of projectHeaders" style="color:white">
+          <tr>
+          <td><a [routerLink]="['/pages/project/detail', projectHeader.id]"
+                routerLinkActive="router-link-active">{{projectHeader.projectTitle}}</a></td>
+            <td>{{projectHeader.supcustName}}</td>
+            <td>{{projectHeader.productName}}</td>
+            <td>{{projectHeader.userName}}</td>
+            <td>{{projectHeader.toDoDate}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    <div class="d-flex justify-content-center">
+      <pagination
+          [boundaryLinks]="true"
+          [totalItems]="pagination.totalItems"
+          [(ngModel)]="pagination.currentPage"
+          [itemsPerPage]="pagination.itemsPerPage"
+          (pageChanged)="pageChanged($event)"
+        previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+      </pagination>
+    </div>
+  </nb-card-body>
+</nb-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xxl-5">
+    <div class="row">
+      <div class="col-md-6">
+        <ngx-profit-card></ngx-profit-card>
+      </div>
+      <div class="col-md-6">
+        <ngx-earning-card></ngx-earning-card>
+      </div>
+      <div class="col-xxl-7">
+        <ngx-ecommerce-charts></ngx-ecommerce-charts>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xxl-9">
+    <ngx-ecommerce-visitors-analytics></ngx-ecommerce-visitors-analytics>
+  </div>
+
+  <div class="col-xxl-3">
+    <ngx-user-activity></ngx-user-activity>
+  </div>
+</div>

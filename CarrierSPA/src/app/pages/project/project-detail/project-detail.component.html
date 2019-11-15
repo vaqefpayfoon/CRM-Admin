@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-lg-12">
+    <nb-card>
+      <nb-card-header>Project Follow</nb-card-header>
+      <nb-card-body>
+      <form #MangageForm="ngForm">
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <div class="buttons-row">
+              <button nbButton status="success" hero (click)="onEdit()" [disabled]="!MangageForm.valid">Find</button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <ng2-completer [datasource]="dataServiceProject" inputClass="form-control" required [(ngModel)]="projectTitle" name="projectTitle"  inputName="searchField" [minSearchLength]="2" placeholder="ProjectTitle">
+            </ng2-completer>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <ng2-completer [datasource]="dataServiceSupcust" inputClass="form-control" required [(ngModel)]="supcustName" name="supcustName"  inputName="searchField" [minSearchLength]="2" placeholder="SupcustName">
+            </ng2-completer>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <ng2-completer [datasource]="dataServiceProduct" inputClass="form-control" required [(ngModel)]="productName" name="productName"  inputName="searchField" [minSearchLength]="2" placeholder="ProductName">
+            </ng2-completer>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <ng2-completer [datasource]="dataServiceUsers" inputClass="form-control" required [(ngModel)]="userName" name="userName"  inputName="searchField" [minSearchLength]="2" placeholder="UserName">
+            </ng2-completer>
+          </div>
+        </div>
+        <br/><br/><br/><br/><br/><br/><br/><br/>
+      </form>
+      <div *ngIf="saveState != '0'">
+        <ng-container *ngIf="saveState == '1'; else elseTemplate">
+          <nb-alert status="success">Data have been successfully Saved</nb-alert>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <nb-alert status="danger">{{saveState}}</nb-alert>
+        </ng-template>
+      </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
